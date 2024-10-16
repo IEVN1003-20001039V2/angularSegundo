@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   imports: [ReactiveFormsModule],
    templateUrl: './zodiaco.component.html',
 })
-export class ZodiacoComponent {
+export default class ZodiacoComponent {
   personaForm: FormGroup;
   personaInfo: any;
 
@@ -54,7 +54,8 @@ export class ZodiacoComponent {
   }
 
   obtenerSignoChino(anio: number): string {
-    const animalesChinos = ['Rata', 'Buey', 'Tigre', 'Conejo', 'Dragón', 'Serpiente', 'Caballo', 'Cabra', 'Mono', 'Gallo', 'Perro', 'Cerdo'];
+    const animalesChinos = ['Rata', 'Buey', 'Tigre', 'Conejo', 'Dragón', 'Serpiente', 
+      'Caballo', 'Cabra', 'Mono', 'Gallo', 'Perro', 'Cerdo'];
     return animalesChinos[(anio - 4) % 12];
   }
 
