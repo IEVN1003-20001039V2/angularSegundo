@@ -15,9 +15,14 @@
         width: 45%; /* Ajusta el ancho de la tabla si es necesario */
         margin-right: 20px; /* Espacio del borde derecho */
     }
+                                
+
+
 
     /* Eliminar elementos no deseados para la impresión */
     button, .custom-scroll:after {
         display: none;
     }
 }
+
+

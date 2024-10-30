@@ -120,7 +120,7 @@ export default class EmpleadosComponent implements OnInit {
   guardarEmpleados() {
     localStorage.setItem('empleados', JSON.stringify(this.empleados));
   }
-
+  
   cargarEmpleados() {
     const empleadosGuardados = localStorage.getItem('empleados');
     if (empleadosGuardados) {
