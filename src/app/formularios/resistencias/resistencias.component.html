@@ -1,0 +1,81 @@
+<div class="container">
+  <h1>Calculadora de Resistencias</h1>
+
+  <form [formGroup]="form" (ngSubmit)="calcular()" class="form-container">
+    <div class="form-group">
+      <label>Primera Banda</label>
+      <select formControlName="color1" required>
+        <option *ngFor="let color of colorMap | keyvalue" [value]="color.key">{{ color.key }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Segunda Banda</label>
+      <select formControlName="color2" required>
+        <option *ngFor="let color of colorMap | keyvalue" [value]="color.key">{{ color.key }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Tercera Banda</label>
+      <select formControlName="color3" required>
+        <option *ngFor="let color of colorMap | keyvalue" [value]="color.key">{{ color.key }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Tolerancia</label>
+      <div class="tolerance-options">
+        <label><input type="radio" formControlName="tolerance" value="5" /> Oro</label>
+        <label><input type="radio" formControlName="tolerance" value="10" /> Plata</label>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid" class="calculate-button">Calcular</button>
+  </form>
+
+  <div *ngIf="showResults" class="results-container">
+    <h2>Resultados:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Color 1</th>
+          <th>Color 2</th>
+          <th>Color 3</th>
+          <th>Tolerancia</th>
+          <th>Valor</th>
+          <th>Valor Máximo</th>
+          <th>Valor Mínimo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ results[results.length - 1]?.bandas[0] }}</td>
+          <td>{{ results[results.length - 1]?.bandas[1] }}</td>
+          <td>{{ results[results.length - 1]?.bandas[2] }}</td>
+          <td>{{ results[results.length - 1]?.tolerancia }}%</td>
+          <td>{{ results[results.length - 1]?.valor }} Ω</td>
+          <td>{{ results[results.length - 1]?.valorMax }} Ω</td>
+          <td>{{ results[results.length - 1]?.valorMin }} Ω</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Historial de Cálculos -->
+  <div *ngIf="historial.length > 0" class="history-container">
+    <h2>Historial de Cálculos:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Bandas</th>
+          <th>Tolerancia</th>
+          <th>Valor</th>
+          <th>Máximo</th>
+          <th>Mínimo</th>
+        </tr>
+      </thead>
+      
+    </table>
+  </div>
+</div>

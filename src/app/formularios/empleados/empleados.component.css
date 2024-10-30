@@ -1,0 +1,23 @@
+@media print {
+    .custom-scroll {
+        overflow: visible; /* Asegura que todo el contenido sea visible */
+    }
+
+    /* Centrar y posicionar el formulario a la izquierda */
+    form {
+        float: left;
+        width: 50%; /* Ajusta el ancho del formulario si es necesario */
+    }
+
+    /* Colocar la tabla a la derecha en la página de impresión */
+    table {
+        float: right;
+        width: 45%; /* Ajusta el ancho de la tabla si es necesario */
+        margin-right: 20px; /* Espacio del borde derecho */
+    }
+
+    /* Eliminar elementos no deseados para la impresión */
+    button, .custom-scroll:after {
+        display: none;
+    }
+}

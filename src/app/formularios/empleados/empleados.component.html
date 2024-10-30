@@ -1,0 +1,86 @@
+<div class="container mx-auto py-8">
+  <h1 class="text-3xl font-extrabold text-gray-900 mb-6">Registro de Empleados</h1>
+
+  <!-- Formulario de registro de empleados -->
+  <form [formGroup]="formulario" (ngSubmit)="registrarEmpleado()" class="space-y-6 bg-white p-8 shadow-lg rounded-lg border border-gray-300">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="matricula" class="block text-sm font-semibold text-gray-700 mb-2">Matrícula</label>
+        <input id="matricula" type="text" formControlName="matricula" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500">
+      </div>
+      <div>
+        <label for="nombre" class="block text-sm font-semibold text-gray-700 mb-2">Nombre</label>
+        <input id="nombre" type="text" formControlName="nombre" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500">
+      </div>
+      <div>
+        <label for="correo" class="block text-sm font-semibold text-gray-700 mb-2">Correo</label>
+        <input id="correo" type="email" formControlName="correo" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500">
+      </div>
+      <div>
+        <label for="edad" class="block text-sm font-semibold text-gray-700 mb-2">Edad</label>
+        <input id="edad" type="number" formControlName="edad" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500">
+      </div>
+      <div>
+        <label for="horas" class="block text-sm font-semibold text-gray-700 mb-2">Horas trabajadas</label>
+        <input id="horas" type="number" formControlName="horas" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500">
+      </div>
+    </div>
+
+    <div class="text-right">
+      <button type="submit" class="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-500">
+        Registrar
+      </button>
+    </div>
+  </form>
+
+  <!-- Botón para imprimir la tabla -->
+  <div class="mt-8">
+    <button (click)="imprimirTabla()" class="px-4 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none focus:ring focus:ring-green-500 mb-4">
+      Imprimir tabla
+    </button>
+
+    <!-- Tabla de empleados registrados -->
+    <div class="relative overflow-x-auto shadow-lg rounded-lg custom-scroll">
+      <table class="w-full text-sm text-left border-collapse bg-white rounded-lg">
+        <thead class="bg-gray-100 border-b-2 border-gray-300 text-gray-600 uppercase tracking-wide">
+          <tr>
+            <th scope="col" class="px-6 py-3 font-medium">Matrícula</th>
+            <th scope="col" class="px-6 py-3 font-medium">Nombre</th>
+            <th scope="col" class="px-6 py-3 font-medium">Correo</th>
+            <th scope="col" class="px-6 py-3 font-medium">Edad</th>
+            <th scope="col" class="px-6 py-3 font-medium">Horas Trabajadas</th>
+            <th scope="col" class="px-6 py-3 font-medium">Subtotal</th>
+            <th scope="col" class="px-6 py-3 font-medium">Horas Extras</th>
+            <th scope="col" class="px-6 py-3 font-medium">Pago Horas Extras</th>
+            <th scope="col" class="px-6 py-3 font-medium">Total</th>
+            <th scope="col" class="px-6 py-3 font-medium">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let empleado of empleados" class="hover:bg-gray-50">
+            <td class="px-6 py-4">{{ empleado.matricula }}</td>
+            <td class="px-6 py-4">{{ empleado.nombre }}</td>
+            <td class="px-6 py-4">{{ empleado.correo }}</td>
+            <td class="px-6 py-4">{{ empleado.edad }}</td>
+            <td class="px-6 py-4">{{ empleado.horas }}</td>
+            <td class="px-6 py-4">{{ calcularPagoNormal(empleado.horas) }}</td>
+            <td class="px-6 py-4">{{ calcularHorasExtras(empleado.horas) }}</td>
+            <td class="px-6 py-4">{{ calcularPagoHorasExtras(empleado.horas) }}</td>
+            <td class="px-6 py-4">{{ calcularTotalPago(empleado.horas) }}</td>
+            <td class="px-6 py-4 space-x-2">
+              <button (click)="modificarEmpleado(empleado.matricula)" class="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                Modificar
+              </button>
+              <button (click)="eliminarEmpleado(empleado.matricula)" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700">
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mt-4 text-right">
+        <h3 class="font-bold text-lg">Total a Pagar: {{ totalGeneral }}</h3>
+      </div>
+    </div>
+  </div>
+</div>

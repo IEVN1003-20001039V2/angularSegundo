@@ -11,7 +11,8 @@ export const routes: Routes = [
         loadChildren: () => import('./formularios/formularios.routes')
     },
     {
-        path:'formulario',
-        loadChildren: () => import('./formulario/formulario.routes')
+        path: 'empleados',
+        loadChildren: () => import('./formularios/empleados/empleados.component')
     }
-]as Routes
+        
+];
